@@ -1,0 +1,14 @@
+C:\Users\ncmor\Documents\Codex\2026-05-22\develop-a-program-that-records-input\obj\Debug\net9.0-windows\MouseInputRecorder.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ncmor\Documents\Codex\2026-05-22\develop-a-program-that-records-input\obj\Debug\net9.0-windows\MouseInputRecorder.AssemblyInfoInputs.cache
+C:\Users\ncmor\Documents\Codex\2026-05-22\develop-a-program-that-records-input\obj\Debug\net9.0-windows\MouseInputRecorder.AssemblyInfo.cs
+C:\Users\ncmor\Documents\Codex\2026-05-22\develop-a-program-that-records-input\obj\Debug\net9.0-windows\MouseInputRecorder.csproj.CoreCompileInputs.cache
+C:\Users\ncmor\Documents\Codex\2026-05-22\develop-a-program-that-records-input\bin\Debug\net9.0-windows\MouseInputRecorder.deps.json
+C:\Users\ncmor\Documents\Codex\2026-05-22\develop-a-program-that-records-input\bin\Debug\net9.0-windows\MouseInputRecorder.runtimeconfig.json
+C:\Users\ncmor\Documents\Codex\2026-05-22\develop-a-program-that-records-input\bin\Debug\net9.0-windows\MouseInputRecorder.dll
+C:\Users\ncmor\Documents\Codex\2026-05-22\develop-a-program-that-records-input\bin\Debug\net9.0-windows\MouseInputRecorder.pdb
+C:\Users\ncmor\Documents\Codex\2026-05-22\develop-a-program-that-records-input\obj\Debug\net9.0-windows\MouseInputRecorder.dll
+C:\Users\ncmor\Documents\Codex\2026-05-22\develop-a-program-that-records-input\obj\Debug\net9.0-windows\refint\MouseInputRecorder.dll
+C:\Users\ncmor\Documents\Codex\2026-05-22\develop-a-program-that-records-input\obj\Debug\net9.0-windows\MouseInputRecorder.pdb
+C:\Users\ncmor\Documents\Codex\2026-05-22\develop-a-program-that-records-input\obj\Debug\net9.0-windows\MouseInputRecorder.genruntimeconfig.cache
+C:\Users\ncmor\Documents\Codex\2026-05-22\develop-a-program-that-records-input\obj\Debug\net9.0-windows\ref\MouseInputRecorder.dll
+C:\Users\ncmor\Documents\Codex\2026-05-22\develop-a-program-that-records-input\bin\Debug\net9.0-windows\MouseInputRecorder.exe
