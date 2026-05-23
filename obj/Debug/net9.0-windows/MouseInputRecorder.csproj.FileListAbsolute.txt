@@ -12,3 +12,4 @@ C:\Users\ncmor\Documents\Codex\2026-05-22\develop-a-program-that-records-input\o
 C:\Users\ncmor\Documents\Codex\2026-05-22\develop-a-program-that-records-input\obj\Debug\net9.0-windows\MouseInputRecorder.genruntimeconfig.cache
 C:\Users\ncmor\Documents\Codex\2026-05-22\develop-a-program-that-records-input\obj\Debug\net9.0-windows\ref\MouseInputRecorder.dll
 C:\Users\ncmor\Documents\Codex\2026-05-22\develop-a-program-that-records-input\bin\Debug\net9.0-windows\MouseInputRecorder.exe
+C:\Users\ncmor\Documents\Codex\2026-05-22\develop-a-program-that-records-input\obj\Debug\net9.0-windows\MouseInputRecorder.sourcelink.json

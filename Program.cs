@@ -19,7 +19,17 @@ internal sealed class RecorderForm : Form
     private readonly Button _stopRecordButton = new() { Text = "Stop Recording", Width = 120, Height = 36, Enabled = false };
     private readonly Button _playButton = new() { Text = "Play", Width = 120, Height = 36, Enabled = false };
     private readonly Button _stopPlayButton = new() { Text = "Stop Playback", Width = 120, Height = 36, Enabled = false };
-    private readonly CheckBox _loopCheckBox = new() { Text = "Loop playback", AutoSize = true };
+    private readonly CheckBox _loopCheckBox = new() { Text = "Enable loop playback", AutoSize = true };
+    private readonly Label _loopCountLabel = new() { Text = "Number of times to play:", AutoSize = true, Enabled = false, Margin = new Padding(28, 10, 0, 0) };
+    private readonly NumericUpDown _loopCountInput = new()
+    {
+        Minimum = 1,
+        Maximum = 999,
+        Value = 2,
+        Width = 90,
+        Enabled = false,
+        Margin = new Padding(8, 6, 0, 0)
+    };
     private readonly Label _statusLabel = new() { AutoSize = true, Text = "Ready. Click Record to capture mouse and keyboard input." };
     private readonly Label _countLabel = new() { AutoSize = true, Text = "Recorded events: 0" };
 
@@ -30,7 +40,7 @@ internal sealed class RecorderForm : Form
     {
         Text = "Input Recorder";
         StartPosition = FormStartPosition.CenterScreen;
-        ClientSize = new Size(600, 180);
+        ClientSize = new Size(620, 250);
         FormBorderStyle = FormBorderStyle.FixedSingle;
         MaximizeBox = false;
 
@@ -41,7 +51,24 @@ internal sealed class RecorderForm : Form
             Padding = new Padding(12, 12, 12, 4),
             WrapContents = false
         };
-        controls.Controls.AddRange(new Control[] { _recordButton, _stopRecordButton, _playButton, _stopPlayButton, _loopCheckBox });
+        controls.Controls.AddRange(new Control[] { _recordButton, _stopRecordButton, _playButton, _stopPlayButton });
+
+        var playbackOptionsGroup = new GroupBox
+        {
+            Dock = DockStyle.Top,
+            Height = 74,
+            Text = "Playback repeat",
+            Padding = new Padding(12, 10, 12, 10)
+        };
+        var playbackOptions = new FlowLayoutPanel
+        {
+            Dock = DockStyle.Fill,
+            Padding = new Padding(0, 8, 0, 0),
+            WrapContents = false
+        };
+        _loopCheckBox.Margin = new Padding(0, 10, 0, 0);
+        playbackOptions.Controls.AddRange(new Control[] { _loopCheckBox, _loopCountLabel, _loopCountInput });
+        playbackOptionsGroup.Controls.Add(playbackOptions);
 
         var info = new FlowLayoutPanel
         {
@@ -58,12 +85,14 @@ internal sealed class RecorderForm : Form
         });
 
         Controls.Add(info);
+        Controls.Add(playbackOptionsGroup);
         Controls.Add(controls);
 
         _recordButton.Click += (_, _) => StartRecording();
         _stopRecordButton.Click += (_, _) => StopRecording();
         _playButton.Click += async (_, _) => await StartPlaybackAsync();
         _stopPlayButton.Click += (_, _) => StopPlayback();
+        _loopCheckBox.CheckedChanged += (_, _) => SetLoopCountUi();
         FormClosing += (_, _) =>
         {
             StopPlayback();
@@ -128,15 +157,20 @@ internal sealed class RecorderForm : Form
         var events = _recorder.Events.ToArray();
         _playbackCts = new CancellationTokenSource();
         SetPlaybackUi(isPlaying: true);
-        _statusLabel.Text = _loopCheckBox.Checked ? "Playing on loop..." : "Playing...";
+        var targetPlayCount = _loopCheckBox.Checked ? (int)_loopCountInput.Value : 1;
+        _statusLabel.Text = targetPlayCount > 1 ? $"Playing 1 of {targetPlayCount}..." : "Playing...";
 
         try
         {
-            do
+            for (var playNumber = 1; playNumber <= targetPlayCount; playNumber++)
             {
                 await InputPlayer.PlayAsync(events, _playbackCts.Token);
+
+                if (playNumber < targetPlayCount && !_playbackCts.IsCancellationRequested)
+                {
+                    _statusLabel.Text = $"Playing {playNumber + 1} of {targetPlayCount}...";
+                }
             }
-            while (_loopCheckBox.Checked && !_playbackCts.IsCancellationRequested);
 
             _statusLabel.Text = "Playback complete.";
         }
@@ -164,6 +198,14 @@ internal sealed class RecorderForm : Form
         _playButton.Enabled = !isPlaying && _recorder.Events.Count > 0;
         _stopPlayButton.Enabled = isPlaying;
         _loopCheckBox.Enabled = !isPlaying;
+        SetLoopCountUi();
+    }
+
+    private void SetLoopCountUi()
+    {
+        var enabled = _loopCheckBox.Checked && _loopCheckBox.Enabled;
+        _loopCountLabel.Enabled = enabled;
+        _loopCountInput.Enabled = enabled;
     }
 }
 

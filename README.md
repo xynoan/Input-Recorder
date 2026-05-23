@@ -18,7 +18,7 @@ dotnet run
 1. Click **Record**.
 2. Move/click/scroll the mouse, or type on the keyboard.
 3. Click **Stop Recording** or press **F8**.
-4. Enable **Loop playback** if you want repeated playback.
+4. In **Playback repeat**, enable **Enable loop playback** and set **Number of times to play** if you want repeated playback.
 5. Click **Play**.
 6. Click **Stop Playback** or press **F8** to stop playback.
 
